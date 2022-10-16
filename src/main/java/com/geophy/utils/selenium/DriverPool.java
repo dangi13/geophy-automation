@@ -37,12 +37,13 @@ public class DriverPool {
 	 * @param nodeURL : can be a BorserStack/Saucelabs connect url, or a Selenium
 	 *                hub or node URL
 	 * @return WebDriver
+	 * @throws MalformedURLException 
 	 */
-	public static WebDriver getDriver(String browser, String nodeURL) {
+	public static WebDriver getDriver(String browser, String nodeURL) throws MalformedURLException {
 		LOGGER.info("Creating driver instance for browser: [" + browser + "] and nodeURL as [" + nodeURL + "]" );
 
 		WebDriver driver = null;
-		try {
+
 			if (Objects.nonNull(nodeURL) && !nodeURL.isEmpty()) {
 				LOGGER.info(LOG_DESIGN + "Getting Remote web driver for : {} and node URL is : {} ", browser, nodeURL);
 				driver = getRemoteDriver(browser, nodeURL);
@@ -50,10 +51,9 @@ public class DriverPool {
 				driver = getWebDriver(browser);
 				LOGGER.info(LOG_DESIGN + "Getting web driver for browser : {}", browser);
 			}
-		} catch (Exception e) {
-			System.out.println(e.getStackTrace());
-			LOGGER.error(LOG_DESIGN + "!!!!!!!! Exception occurred while getting webdriver : {}", e.getMessage());
-		}
+		
+			// LOGGER.error(LOG_DESIGN + "!!!!!!!! Exception occurred while getting webdriver : {}", e.getMessage());
+		
 
 		return driver;
 	}
@@ -79,14 +79,14 @@ public class DriverPool {
 			cap.setCapability("browserstack.networkLogsOptions", networkLogsOptions);
 			cap.setJavascriptEnabled(false);
 			nodeURL = System.setProperty("REMOTE_NODE_URL", System.getProperty("BROWSERSTACK_URL"));
-			System.out.println("BROWSER STACK URL IS " + System.getProperty("BROWSERSTACK_URL"));
+			LOGGER.info("BROWSER STACK URL IS " + System.getProperty("BROWSERSTACK_URL"));
 			break;
 		default:
 			cap = DesiredCapabilities.chrome();
 			break;
 		}
 
-		System.out.println("ADI MAN WOW WOW " + System.getProperty("REMOTE_NODE_URL"));
+		LOGGER.info("ADI MAN WOW WOW " + System.getProperty("REMOTE_NODE_URL"));
 		// TODO add support for configuring it from properties file as well.
 		return new RemoteWebDriver(new URL(System.getProperty("REMOTE_NODE_URL")), cap);
 	}
