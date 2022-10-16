@@ -43,7 +43,7 @@ public class DriverPool {
 
 		WebDriver driver = null;
 		try {
-			if (!nodeURL.isEmpty() && Objects.nonNull(nodeURL)) {
+			if (Objects.nonNull(nodeURL) && !nodeURL.isEmpty()) {
 				LOGGER.info(LOG_DESIGN + "Getting Remote web driver for : {} and node URL is : {} ", browser, nodeURL);
 				driver = getRemoteDriver(browser, nodeURL);
 			} else {
