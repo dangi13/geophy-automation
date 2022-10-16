@@ -68,6 +68,7 @@ public class DriverPool {
 		LOGGER.info("I AM INSIDE REMOTE DRIVER");
 		switch (browser.toLowerCase()) {
 		case CHROME:
+			LOGGER.info("THIS IS THE DEFAULT SYSTEM BRO");
 			cap = DesiredCapabilities.chrome();
 			break;
 		case CHROME_BROWSERSTACK:
