@@ -72,19 +72,20 @@ public class DriverPool {
 			break;
 		case CHROME_BROWSERSTACK:
 			cap = DesiredCapabilities.chrome();
-			cap = DesiredCapabilities.chrome();
 			HashMap<String, Boolean> networkLogsOptions = new HashMap<>();
 			networkLogsOptions.put("captureContent", true);
 			cap.setCapability("browserstack.networkLogs", true);
 			cap.setCapability("browserstack.networkLogsOptions", networkLogsOptions);
 			cap.setJavascriptEnabled(false);
 			nodeURL = System.setProperty("REMOTE_NODE_URL", System.getProperty("BROWSERSTACK_URL"));
+			System.out.println("BROWSER STACK URL IS " + System.getProperty("BROWSERSTACK_URL"));
 			break;
 		default:
 			cap = DesiredCapabilities.chrome();
 			break;
 		}
 
+		System.out.println("ADI MAN WOW WOW " + System.getProperty("REMOTE_NODE_URL"));
 		// TODO add support for configuring it from properties file as well.
 		return new RemoteWebDriver(new URL(System.getProperty("REMOTE_NODE_URL")), cap);
 	}
