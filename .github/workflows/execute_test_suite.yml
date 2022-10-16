@@ -30,6 +30,12 @@ on:
           Or you can choose CHROME_BROWSERSTACK in above field and keep this empty for browstack cloud run.
          type: string
          required: false
+         
+env:
+  ENVIRONMENT: ${{ inputs.ENVIRONMENT }}
+  BROWSER: ${{ inputs.BROWSER }}
+  REMOTE_NODE_URL: ${{ inputs.REMOTE_NODE_URL }}
+
 
 jobs:
   build:
