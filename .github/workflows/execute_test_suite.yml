@@ -1,4 +1,4 @@
-name: Deploy platform to demo environment
+name: UI Automation test pipeline
 on:
   workflow_dispatch:
     inputs:
