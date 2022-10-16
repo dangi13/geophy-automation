@@ -8,6 +8,7 @@ import static com.geophy.utils.common.Constants.LOG_DESIGN;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Objects;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -42,7 +43,7 @@ public class DriverPool {
 
 		WebDriver driver = null;
 		try {
-			if (!nodeURL.isEmpty()) {
+			if (!nodeURL.isEmpty() && Objects.nonNull(nodeURL)) {
 				LOGGER.info(LOG_DESIGN + "Getting Remote web driver for : {} and node URL is : {} ", browser, nodeURL);
 				driver = getRemoteDriver(browser, nodeURL);
 			} else {
