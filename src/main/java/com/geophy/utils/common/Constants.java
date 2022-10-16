@@ -54,6 +54,9 @@ public static final String USER_DIR = "user.dir";
 	// browser constants
 	public static final String FIREFOX = "firefox";
 	public static final String CHROME = "chrome";
+	public static final String CHROME_BROWSERSTACK = "chrome_browserstack";
+	public static final String BROWSERSTACK = "browserstack";
+	public static final String HEADLESS_CHROME = "headless_chrome";
 	public static final String INTERNET_EXPLORER = "internetexplorer";
 	
 	// browsers or application constants

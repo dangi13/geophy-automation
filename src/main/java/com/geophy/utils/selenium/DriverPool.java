@@ -1,6 +1,8 @@
 package com.geophy.utils.selenium;
 
 import static com.geophy.utils.common.Constants.CHROME;
+import static com.geophy.utils.common.Constants.HEADLESS_CHROME;
+import static com.geophy.utils.common.Constants.CHROME_BROWSERSTACK;
 import static com.geophy.utils.common.Constants.LOG_DESIGN;
 
 import java.net.MalformedURLException;
@@ -27,17 +29,19 @@ public class DriverPool {
 	private static final Logger LOGGER = LoggerFactory.getLogger(DriverPool.class);
 
 	/**
-	 * It will get the WebDriver for specified browser when we want to run it on Selenium grid or any cloud solution.
+	 * It will get the WebDriver for specified browser when we want to run it on
+	 * Selenium grid or any cloud solution.
 	 * 
 	 * @param browser
-	 * @param nodeURL : can be a BorserStack/Saucelabs connect url, or a Selenium hub or node URL
+	 * @param nodeURL : can be a BorserStack/Saucelabs connect url, or a Selenium
+	 *                hub or node URL
 	 * @return WebDriver
 	 */
 	public static WebDriver getDriver(String browser, String nodeURL) {
 
 		WebDriver driver = null;
 		try {
-			  if (!nodeURL.isEmpty()) {
+			if (!nodeURL.isEmpty()) {
 				LOGGER.info(LOG_DESIGN + "Getting Remote web driver for : {} and node URL is : {} ", browser, nodeURL);
 				driver = getRemoteDriver(browser, nodeURL);
 			} else {
@@ -59,24 +63,29 @@ public class DriverPool {
 	 */
 	public static WebDriver getRemoteDriver(String browser, String nodeURL) throws MalformedURLException {
 		DesiredCapabilities cap = new DesiredCapabilities();
-		
+
 		switch (browser.toLowerCase()) {
 		case CHROME:
 			cap = DesiredCapabilities.chrome();
+			break;
+		case CHROME_BROWSERSTACK:
+			cap = DesiredCapabilities.chrome();
+			cap = DesiredCapabilities.chrome();
+			HashMap<String, Boolean> networkLogsOptions = new HashMap<>();
+			networkLogsOptions.put("captureContent", true);
+			cap.setCapability("browserstack.networkLogs", true);
+			cap.setCapability("browserstack.networkLogsOptions", networkLogsOptions);
+			cap.setJavascriptEnabled(false);
+			nodeURL = System.setProperty("REMOTE_NODE_URL", System.getProperty("BROWSERSTACK_URL"));
 			break;
 		default:
 			cap = DesiredCapabilities.chrome();
 			break;
 		}
-		HashMap<String, Boolean> networkLogsOptions = new HashMap<>();
-		networkLogsOptions.put("captureContent", true);
-		cap.setCapability("browserstack.networkLogs", true);
-		cap.setCapability("browserstack.networkLogsOptions", networkLogsOptions);
-		cap.setJavascriptEnabled(false);
 
-		return new RemoteWebDriver(new URL(nodeURL), cap);
+		// TODO add support for configuring it from properties file as well.
+		return new RemoteWebDriver(new URL(System.getProperty("REMOTE_NODE_URL")), cap);
 	}
-
 
 	/**
 	 * @param browser browser name
@@ -90,6 +99,9 @@ public class DriverPool {
 		case CHROME:
 			driver = getChromeDriver(cap);
 			break;
+		case HEADLESS_CHROME:
+			driver = getHeadlessChromeDriver(cap);
+			break;
 		default:
 			driver = getHeadlessChromeDriver(cap);
 			break;
@@ -98,12 +110,11 @@ public class DriverPool {
 		return driver;
 	}
 
-
 	/**
 	 * @return instance of chrome driver
 	 */
 	public static WebDriver getChromeDriver(DesiredCapabilities cap) {
-		
+
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
 		options.setExperimentalOption("useAutomationExtension", false);
@@ -112,17 +123,17 @@ public class DriverPool {
 
 		return new ChromeDriver(options);
 	}
-	
+
 	/**
 	 * @return instance of chrome driver
 	 */
 	public static WebDriver getHeadlessChromeDriver(DesiredCapabilities cap) {
-		WebDriverManager.chromedriver().setup();	
+		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-        options.addArguments("--headless");
-        options.addArguments("--disable-gpu");
-        
-        return new ChromeDriver(options);
+		options.addArguments("--headless");
+		options.addArguments("--disable-gpu");
+
+		return new ChromeDriver(options);
 	}
 
 }
