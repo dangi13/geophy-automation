@@ -15,7 +15,7 @@ public class DriverManager {
 		}
 		
 		String browserName = System.getenv("BROWSER") != null ? System.getenv("BROWSER"): Config.getProperty("BROWSER");
-		String remoteURL = System.getenv("REMOTE_URL") != null ? System.getenv("REMOTE_URL"): Config.getProperty("REMOTE_URL");
+		String remoteURL = System.getenv("REMOTE_NODE_URL") != null ? System.getenv("REMOTE_NODE_URL"): Config.getProperty("REMOTE_URL");
 		driver.set(DriverPool.getDriver(browserName, remoteURL));
 
 		return driver.get();
