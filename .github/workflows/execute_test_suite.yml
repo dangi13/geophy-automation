@@ -4,7 +4,7 @@ on:
     inputs:
       ENVIRONMENT:
         description: On Which environment you would like to run tests.
-        type: string
+        type: choice
         required: true
         options:
            - dev
@@ -15,7 +15,7 @@ on:
       BROWSER:
         description: On Which browser you would like to run tests. (By default headless chrome would run).
          Right now only added support for chrome, but we can add all other browsers as we continue.
-        type: string
+        type: choice
         required: false
         options:
            - CHROME
@@ -28,10 +28,10 @@ on:
       REMOTE_NODE_URL:
          description: Please enter the selenium grid URL in case you want to run tests there.
           Or you can choose BROWSERSTACK which is also supported.
-         type: string
+         type: choice
          required: false
          options:
-            - BROWSERSTACK
+            - ${{ secrets.BROWSERSTACK_URL }}
 
 jobs:
   build:
