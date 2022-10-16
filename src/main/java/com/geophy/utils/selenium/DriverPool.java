@@ -38,6 +38,7 @@ public class DriverPool {
 	 * @return WebDriver
 	 */
 	public static WebDriver getDriver(String browser, String nodeURL) {
+		LOGGER.info("Creating driver instance for browser: [" + browser + "] and nodeURL as [" + nodeURL + "]" );
 
 		WebDriver driver = null;
 		try {
