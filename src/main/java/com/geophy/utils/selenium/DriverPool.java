@@ -81,7 +81,7 @@ public class DriverPool {
 			cap.setCapability("browserstack.networkLogsOptions", networkLogsOptions);
 			cap.setJavascriptEnabled(false);
 			LOGGER.info("I AM setting uop ENABLED BSTACK OPTION");
-			nodeURL = System.setProperty("REMOTE_NODE_URL", System.getProperty("BROWSERSTACK_URL"));
+			nodeURL = System.setProperty("REMOTE_NODE_URL", System.getenv("BROWSERSTACK_URL"));
 			break;
 		default:
 			LOGGER.info("THIS IS THE DEFAULT SYSTEM BRO");
