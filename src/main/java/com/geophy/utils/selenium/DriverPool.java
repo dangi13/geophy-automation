@@ -138,7 +138,7 @@ public class DriverPool {
 		options.addArguments("--no-sandbox");
 		options.addArguments("disable-infobars");
 		options.addArguments("start-maximized");
-		options.addArguments("--disable-extensions");
+		options.addArguments("--disable-dev-shm-usage");
 
 		return new ChromeDriver(options);
 	}
