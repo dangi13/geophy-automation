@@ -22,6 +22,7 @@ on:
            - FIREFOX
            - SAFARI
            - HEADLESS_CHROME
+           - CHROME_BROWSERSTACK
         default: HEADLESS_CHROME
         
       REMOTE_NODE_URL:
