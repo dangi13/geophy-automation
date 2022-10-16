@@ -37,13 +37,12 @@ public class DriverPool {
 	 * @param nodeURL : can be a BorserStack/Saucelabs connect url, or a Selenium
 	 *                hub or node URL
 	 * @return WebDriver
-	 * @throws MalformedURLException 
 	 */
-	public static WebDriver getDriver(String browser, String nodeURL) throws MalformedURLException {
+	public static WebDriver getDriver(String browser, String nodeURL) {
 		LOGGER.info("Creating driver instance for browser: [" + browser + "] and nodeURL as [" + nodeURL + "]" );
 
 		WebDriver driver = null;
-
+		try {
 			if (Objects.nonNull(nodeURL) && !nodeURL.isEmpty()) {
 				LOGGER.info(LOG_DESIGN + "Getting Remote web driver for : {} and node URL is : {} ", browser, nodeURL);
 				driver = getRemoteDriver(browser, nodeURL);
@@ -51,9 +50,9 @@ public class DriverPool {
 				driver = getWebDriver(browser);
 				LOGGER.info(LOG_DESIGN + "Getting web driver for browser : {}", browser);
 			}
-		
-			// LOGGER.error(LOG_DESIGN + "!!!!!!!! Exception occurred while getting webdriver : {}", e.getMessage());
-		
+		} catch (Exception e) {
+			LOGGER.error(LOG_DESIGN + "!!!!!!!! Exception occurred while getting webdriver : {}", e.getMessage());
+		}
 
 		return driver;
 	}
@@ -66,27 +65,30 @@ public class DriverPool {
 	 */
 	public static WebDriver getRemoteDriver(String browser, String nodeURL) throws MalformedURLException {
 		DesiredCapabilities cap = new DesiredCapabilities();
-
+		LOGGER.info("I AM INSIDE REMOTE DRIVER");
 		switch (browser.toLowerCase()) {
 		case CHROME:
 			cap = DesiredCapabilities.chrome();
 			break;
 		case CHROME_BROWSERSTACK:
+			LOGGER.info("I AM INSIDE ENABLED BSTACK OPTION");
+			cap = DesiredCapabilities.chrome();
 			cap = DesiredCapabilities.chrome();
 			HashMap<String, Boolean> networkLogsOptions = new HashMap<>();
 			networkLogsOptions.put("captureContent", true);
 			cap.setCapability("browserstack.networkLogs", true);
 			cap.setCapability("browserstack.networkLogsOptions", networkLogsOptions);
 			cap.setJavascriptEnabled(false);
+			LOGGER.info("I AM setting uop ENABLED BSTACK OPTION");
 			nodeURL = System.setProperty("REMOTE_NODE_URL", System.getProperty("BROWSERSTACK_URL"));
-			LOGGER.info("BROWSER STACK URL IS " + System.getProperty("BROWSERSTACK_URL"));
 			break;
 		default:
+			LOGGER.info("THIS IS THE DEFAULT SYSTEM BRO");
 			cap = DesiredCapabilities.chrome();
 			break;
 		}
 
-		LOGGER.info("ADI MAN WOW WOW " + System.getProperty("REMOTE_NODE_URL"));
+		LOGGER.info("FINALLY SOME REMORE  SYSTEM BRO");
 		// TODO add support for configuring it from properties file as well.
 		return new RemoteWebDriver(new URL(System.getProperty("REMOTE_NODE_URL")), cap);
 	}
@@ -140,7 +142,7 @@ public class DriverPool {
 		options.addArguments("--no-sandbox");
 		options.addArguments("disable-infobars");
 		options.addArguments("start-maximized");
-		options.addArguments("--disable-dev-shm-usage");
+		options.addArguments("--disable-extensions");
 
 		return new ChromeDriver(options);
 	}
