@@ -27,11 +27,9 @@ on:
         
       REMOTE_NODE_URL:
          description: Please enter the selenium grid URL in case you want to run tests there.
-          Or you can choose BROWSERSTACK which is also supported.
-         type: choice
+          Or you can choose CHROME_BROWSERSTACK in above field and keep this empty for browstack cloud run.
+         type: string
          required: false
-         options:
-            - ${{ secrets.BROWSERSTACK_URL }}
 
 jobs:
   build:
