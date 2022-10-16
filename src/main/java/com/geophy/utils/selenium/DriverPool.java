@@ -51,6 +51,7 @@ public class DriverPool {
 				LOGGER.info(LOG_DESIGN + "Getting web driver for browser : {}", browser);
 			}
 		} catch (Exception e) {
+			System.out.println(e.getStackTrace());
 			LOGGER.error(LOG_DESIGN + "!!!!!!!! Exception occurred while getting webdriver : {}", e.getMessage());
 		}
 
