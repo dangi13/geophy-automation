@@ -328,7 +328,18 @@ public class WebUtils {
 		LOGGER.info(LOG_DESIGN + "waiting for visibility of element [{}] for {} seconds", locator, seconds);
 		WebDriverWait wait = new WebDriverWait(driver, seconds);
 		wait.until(ExpectedConditions.visibilityOfElementLocated(getByObject(locator)));
-
+	}
+	
+	/**
+	 * It will check that an element is present on the DOM of a page and visible.
+	 * 
+	 * @param locator
+	 * @param seconds
+	 */
+	public void waitForElementVisibility(WebElement element, long seconds) {
+		LOGGER.info(LOG_DESIGN + "waiting for visibility of element [{}] for {} seconds", element, seconds);
+		WebDriverWait wait = new WebDriverWait(driver, seconds);
+		wait.until(ExpectedConditions.visibilityOf(element));
 	}
 
 	/**

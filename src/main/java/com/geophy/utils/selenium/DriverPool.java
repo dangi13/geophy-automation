@@ -137,13 +137,9 @@ public class DriverPool {
 	public static WebDriver getHeadlessChromeDriver(DesiredCapabilities cap) {
 		WebDriverManager.chromedriver().setup();
 		ChromeOptions options = new ChromeOptions();
-		options.setExperimentalOption("excludeSwitches", "ignore-certificate-errors");
 		options.addArguments("--headless");
 		options.addArguments("--disable-gpu");
 		options.addArguments("--no-sandbox");
-		options.addArguments("disable-infobars");
-		options.addArguments("start-maximized");
-		options.addArguments("--disable-extensions");
 
 		return new ChromeDriver(options);
 	}
