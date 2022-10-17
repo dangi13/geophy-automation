@@ -6,7 +6,6 @@ Feature: Evra property analysis
     When Submit username and password
     Then Patrice see Property Search Bar on the home page
 
-
   Scenario: User should be able to see Sample Property
     Given Patrice see Property Search Bar on the home page
     Then Patrice see tabs on the page header
@@ -19,3 +18,13 @@ Feature: Evra property analysis
       | Neighborhood        |
       | Location Benchmarks |
       | Sales Comps         |
+
+  Scenario: User should be able to search property and run valuation
+    Given Patrice see Property Search Bar on the home page
+    And Patrice searches this address "555 N. College Avenue, Tempe, AZ, 85281" and selects
+    And Patrice clicks on Valuation Tab
+    And Patrice enters valuation inputs
+      | Number of Units | Year of Construction | Net Operating Income |
+      |             200 |                 2000 | $2,000,000           |
+    And Patrice clicks on RUN VALUATION button
+    Then Patrice sees Property Details section

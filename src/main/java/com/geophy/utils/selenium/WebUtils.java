@@ -341,6 +341,18 @@ public class WebUtils {
 		WebDriverWait wait = new WebDriverWait(driver, seconds);
 		wait.until(ExpectedConditions.visibilityOf(element));
 	}
+	
+	/**
+	 * It will check that an element is present on the DOM of a page and visible.
+	 * 
+	 * @param locator
+	 * @param seconds
+	 */
+	public void waitForElementVisibility(WebElement element) {
+		LOGGER.info(LOG_DESIGN + "waiting for visibility of element [{}] for {} seconds", element, Config.getProperty("VISIBILITY_TIMEOUT"));
+		WebDriverWait wait = new WebDriverWait(driver, Integer.valueOf(Config.getProperty("VISIBILITY_TIMEOUT")));
+		wait.until(ExpectedConditions.visibilityOf(element));
+	}
 
 	/**
 	 * It will check that an element is present on the DOM of a page and visible.
@@ -400,6 +412,7 @@ public class WebUtils {
 	public void click(WebElement element) {
 		try {
 			LOGGER.info(LOG_DESIGN + "Clicking on : [{}]", element);
+			waitForElementVisibility(element);
 			highlightWebElement(element);
 			element.click();
 		} catch (Exception e) {
@@ -497,6 +510,7 @@ public class WebUtils {
 	 * @param text
 	 */
 	public void enterText(WebElement element, String text) {
+		waitForElementVisibility(element);
 		highlightWebElement(element);
 		element.clear(); // clearing if any text is present in text box.
 		LOGGER.info(LOG_DESIGN + "Entering text for element: [{}] Text is :[{}]", element, text);
@@ -510,6 +524,7 @@ public class WebUtils {
 	 * @param locator
 	 */
 	public void clearTextBox(WebElement element) {
+		waitForElementVisibility(element);
 		highlightWebElement(element);
 		element.clear();
 		LOGGER.info(LOG_DESIGN + "Cleared text for : [{}]", element);
@@ -523,6 +538,7 @@ public class WebUtils {
 	 * @param text
 	 */
 	public void enterTextUsingActions(WebElement element, String text) {
+		waitForElementVisibility(element);
 		highlightWebElement(element);
 		LOGGER.info(LOG_DESIGN + "Entering text for : [{}] ::   Text is : [{}]", element, text);
 		Actions actions = new Actions(driver);
@@ -549,6 +565,7 @@ public class WebUtils {
 	 * @param element
 	 */
 	public void jsClick(WebElement element) {
+		waitForElementVisibility(element);
 		LOGGER.info(LOG_DESIGN + "Clicking on element : {} using javascript", element);
 		highlightWebElement(element);
 		JavascriptExecutor executor = (JavascriptExecutor) driver;
@@ -615,6 +632,7 @@ public class WebUtils {
 	 * @param seconds
 	 */
 	public void actionClick(WebElement element, long seconds) {
+		waitForElementVisibility(element);
 		highlightWebElement(element);
 		LOGGER.info(LOG_DESIGN + "Clicking on WebElement using Actions class, element : [{}]", element);
 		WebDriverWait driverWait = new WebDriverWait(driver, seconds);
@@ -629,6 +647,7 @@ public class WebUtils {
 	 * @param element WebElement
 	 */
 	public void actionClick(WebElement element) {
+		waitForElementVisibility(element);
 		highlightWebElement(element);
 		LOGGER.info(LOG_DESIGN + "Clicking on WebElement using Actions class, element : [{}]", element);
 		WebDriverWait driverWait = new WebDriverWait(driver, Long.valueOf(Config.getProperty("maxTimeOut")));
@@ -644,6 +663,7 @@ public class WebUtils {
 	 * @param element WebElement
 	 */
 	public void actionPress(WebElement element) {
+		waitForElementVisibility(element);
 		highlightWebElement(element);
 		LOGGER.info(LOG_DESIGN + "Clicking on WebElement using Actions class, element : [{}]", element);
 		Actions actions = new Actions(driver);
@@ -658,6 +678,7 @@ public class WebUtils {
 	 * @param value
 	 */
 	public void selectDropDownByValue(WebElement element, String value) {
+		waitForElementVisibility(element);
 		LOGGER.info(LOG_DESIGN + "Selecting value [{}] from dropdown, element : [{}]", value, element);
 		Select select = new Select(element);
 		select.selectByValue(value);
@@ -670,6 +691,7 @@ public class WebUtils {
 	 * @param value
 	 */
 	public void selectDropDownByIndex(WebElement element, int index) {
+		waitForElementVisibility(element);
 		LOGGER.info(LOG_DESIGN + "Selecting index [{}] from dropdown, element : [{}]", index, element);
 		Select select = new Select(element);
 		select.selectByIndex(index);
@@ -682,6 +704,7 @@ public class WebUtils {
 	 * @param value
 	 */
 	public void selectDropDownByVisibleText(WebElement element, String visibleText) {
+		waitForElementVisibility(element);
 		LOGGER.info(LOG_DESIGN + "Selecting visibleText [{}] from dropdown, element : [{}]", visibleText, element);
 		Select select = new Select(element);
 		select.selectByVisibleText(visibleText);
@@ -719,7 +742,8 @@ public class WebUtils {
 	 */
 	public boolean isElementDisplayed(WebElement element) {
 		LOGGER.info(LOG_DESIGN + "Checking if element is displayed, element : [{}]", element);
-
+		waitForElementVisibility(element);
+		highlightWebElement(element);
 		return element.isDisplayed();
 	}
 

@@ -1,12 +1,14 @@
 package com.github.automation.pages;
 
+import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 
+import com.geophy.utils.common.Config;
 import com.geophy.utils.selenium.WebUtils;
-import com.github.automation.core.BaseConfiguration;
 
-public class LoginPage extends BaseConfiguration {
+public class LoginPage {
 	
 	@FindBy(css = ".visible-md.visible-lg #signInFormUsername")
 	private WebElement emailInputBox;
@@ -19,24 +21,22 @@ public class LoginPage extends BaseConfiguration {
 
 	private WebUtils webUtils;
 
-	public LoginPage() {
+	public LoginPage(WebDriver driver) {
 		webUtils = new WebUtils(driver);
+		PageFactory.initElements(driver, this);
 	}
 	
-	public void login (String username, String password) {
-		webUtils.waitForElementVisibility(passwordInputBox, 10);
-		webUtils.enterText(emailInputBox, username);
-		webUtils.enterText(passwordInputBox, password);
+	public void login () {
+		webUtils.enterText(emailInputBox, Config.getProperty("EVRA_EMAIL"));
+		webUtils.enterText(passwordInputBox, System.getenv("EVRA_PASSWORD"));
 		webUtils.click(signInButton);
 	}
 	
 	public void enterEmail(String username) {
-		webUtils.waitForElementVisibility(emailInputBox, 10);
 		webUtils.enterText(emailInputBox, username);
 	}
 	
 	public void enterPassword(String password) {
-		webUtils.waitForElementVisibility(passwordInputBox, 10);
 		webUtils.enterText(passwordInputBox, password);
 	}
 	
