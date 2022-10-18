@@ -58,8 +58,9 @@ jobs:
         ./scripts/InstallChrome.sh
             
 
-  Run-UI-Test-Suite:
+  Test:
     needs: Build
+    name: Run UI test suite
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -77,9 +78,9 @@ jobs:
           path: |
             allure-results
   
-  publish-allure-report:
-    needs: Run-UI-Test-Suite
-    name: Generate Allure Report
+  Publish:
+    needs: Test
+    name: Publish Allure Report
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
