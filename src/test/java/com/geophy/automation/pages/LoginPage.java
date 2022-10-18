@@ -27,8 +27,9 @@ public class LoginPage {
 	}
 	
 	public void login () {
+		String password = System.getenv("EVRA_PASSWORD") != null ? System.getenv("EVRA_PASSWORD"):Config.getProperty("EVRA_PASSWORD"); 
 		webUtils.enterText(emailInputBox, Config.getProperty("EVRA_EMAIL"));
-		webUtils.enterText(passwordInputBox, Config.getProperty("EVRA_PASSWORD"));
+		webUtils.enterText(passwordInputBox, password);
 		webUtils.click(signInButton);
 	}
 	
