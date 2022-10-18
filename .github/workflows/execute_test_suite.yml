@@ -40,8 +40,8 @@ env:
 
 jobs:
   Build:
-
     runs-on: ubuntu-latest   
+    name: Build and Run tests
 
     steps:
     - uses: actions/checkout@v3
@@ -56,31 +56,24 @@ jobs:
       run: |
        chmod +x ./scripts/InstallChrome.sh
         ./scripts/InstallChrome.sh
-            
-
-  Test:
-    needs: Build
-    name: Run UI test suite
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      
-      - name: Run UI TestSuite
-        env: # lookup key as an environment variable
+        
+    - name: Run UI TestSuite
+      env: # lookup key as an environment variable
          BROWSERSTACK_URL: ${{ secrets.BROWSERSTACK_URL }}
          EVRA_PASSWORD: ${{ secrets.EVRA_PASSWORD }}
-        run: mvn clean install -f pom.xml
-      - name: Save allure test results
-        if: always()
-        uses: actions/upload-artifact@v3
-        with:
+         run: mvn clean install -f pom.xml
+         
+    - name: Save allure test results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
           name: allure-results
           path: |
             allure-results
   
   Publish:
     if: ${{ always()}}
-    needs: Test
+    needs: Build
     name: Publish Allure Report
     runs-on: ubuntu-latest
     steps:
