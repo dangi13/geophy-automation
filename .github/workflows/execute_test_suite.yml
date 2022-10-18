@@ -79,6 +79,7 @@ jobs:
             allure-results
   
   Publish:
+    if: ${{ always()}}
     needs: Test
     name: Publish Allure Report
     runs-on: ubuntu-latest
