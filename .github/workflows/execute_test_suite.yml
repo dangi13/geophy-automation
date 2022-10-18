@@ -41,7 +41,7 @@ env:
 jobs:
   build:
 
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest   
 
     steps:
     - uses: actions/checkout@v3
@@ -51,17 +51,18 @@ jobs:
         java-version: '11'
         distribution: 'temurin'
         cache: maven
-
-    - name: Install chrome
+        
+    - name: Install chromedriver
     - uses: actions/checkout@v2
     - uses: nanasess/setup-chromedriver@v1
       with:
-    # Optional: do not specify to match Chrome's version
-          chromedriver-version: '88.0.4324.96'
+         # Optional: do not specify to match Chrome's version
+           chromedriver-version: '88.0.4324.96'
     - run: |
        export DISPLAY=:99
        chromedriver --url-base=/wd/hub &
        sudo Xvfb -ac :99 -screen 0 1280x1024x24 > /dev/null 2>&1 & # optional
+
     - name: Run UI tests
       env: # lookup key as an environment variable
         BROWSERSTACK_URL: ${{ secrets.BROWSERSTACK_URL }}
