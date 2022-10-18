@@ -78,7 +78,7 @@ jobs:
             allure-results
   
   publish-allure-report:
-    needs: Build
+    needs: Run-UI-Test-Suite
     name: Generate Allure Report
     runs-on: ubuntu-latest
     steps:
