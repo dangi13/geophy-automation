@@ -1,0 +1,7 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Tue Oct 18 13:14:30 GMT 2022","Tue Oct 18 13:14:57 GMT 2022","27028","","Evra property analysis","","User should be able to search property and run valuation","","User should be able to search property and run valuation",""
+"passed","Tue Oct 18 13:14:14 GMT 2022","Tue Oct 18 13:14:30 GMT 2022","15294","","Evra property analysis","","User should be able to see Sample Property","","User should be able to see Sample Property",""
+"passed","Tue Oct 18 13:14:46 GMT 2022","Tue Oct 18 13:15:11 GMT 2022","25113","","Property Map interactions","","User should be able to filter by Year Built","","User should be able to filter by Year Built",""
+"passed","Tue Oct 18 13:15:35 GMT 2022","Tue Oct 18 13:15:44 GMT 2022","8819","","Property Map interactions","","User should see an option to get in touch for Customize Evra insights","","User should see an option to get in touch for Customize Evra insights",""
+"passed","Tue Oct 18 13:15:11 GMT 2022","Tue Oct 18 13:15:35 GMT 2022","24557","","Property Map interactions","","User should be able to filter by Neighborhood Type","","User should be able to filter by Neighborhood Type",""
+"passed","Tue Oct 18 13:14:14 GMT 2022","Tue Oct 18 13:14:46 GMT 2022","31384","","Property Map interactions","","User should be able to filter by units","","User should be able to filter by units",""
