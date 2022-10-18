@@ -61,7 +61,7 @@ jobs:
       env: # lookup key as an environment variable
          BROWSERSTACK_URL: ${{ secrets.BROWSERSTACK_URL }}
          EVRA_PASSWORD: ${{ secrets.EVRA_PASSWORD }}
-         run: mvn clean install -f pom.xml
+      run: mvn clean install -f pom.xml
          
     - name: Save allure test results
       if: always()
