@@ -39,7 +39,7 @@ env:
 
 
 jobs:
-  build:
+  Build:
 
     runs-on: ubuntu-latest   
 
@@ -70,7 +70,8 @@ jobs:
           path: |
             allure-results
   
-  allure:
+  publish-allure-report:
+    needs: Build
     name: Generate Allure Report
     runs-on: ubuntu-latest
     steps:
