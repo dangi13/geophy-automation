@@ -1,4 +1,4 @@
-package com.github.automation.pages;
+package com.geophy.automation.pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -28,7 +28,7 @@ public class LoginPage {
 	
 	public void login () {
 		webUtils.enterText(emailInputBox, Config.getProperty("EVRA_EMAIL"));
-		webUtils.enterText(passwordInputBox, System.getenv("EVRA_PASSWORD"));
+		webUtils.enterText(passwordInputBox, Config.getProperty("EVRA_PASSWORD"));
 		webUtils.click(signInButton);
 	}
 	

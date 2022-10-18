@@ -1,4 +1,4 @@
-package com.github.automation.stepdefinitions;
+package com.geophy.automation.stepdefinitions;
 
 import java.io.ByteArrayInputStream;
 import java.util.concurrent.TimeUnit;

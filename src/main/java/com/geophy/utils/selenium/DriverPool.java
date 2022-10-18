@@ -130,6 +130,16 @@ public class DriverPool {
 
 		return new ChromeDriver(options);
 	}
+	
+	public static WebDriver getChromium(DesiredCapabilities cap) {
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.setExperimentalOption("useAutomationExtension", false);
+		options.addArguments("--disable-notifications");
+		options.setCapability(ChromeOptions.CAPABILITY, options);
+
+		return new ChromeDriver(options);
+	}
 
 	/**
 	 * @return instance of chrome driver

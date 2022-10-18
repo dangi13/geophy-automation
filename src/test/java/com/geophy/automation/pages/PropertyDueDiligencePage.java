@@ -1,4 +1,4 @@
-package com.github.automation.pages;
+package com.geophy.automation.pages;
 
 import java.util.List;
 import java.util.stream.Collectors;

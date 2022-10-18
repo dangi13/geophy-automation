@@ -1,15 +1,15 @@
-package com.github.automation.stepdefinitions;
+package com.geophy.automation.stepdefinitions;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.util.List;
 
-import com.github.automation.pages.EvraHomePage;
-import com.github.automation.pages.InsightsPortalPage;
-import com.github.automation.pages.LoginPage;
-import com.github.automation.pages.PropertyDueDiligencePage;
-import com.github.automation.pages.PropertyMapPage;
+import com.geophy.automation.pages.EvraHomePage;
+import com.geophy.automation.pages.InsightsPortalPage;
+import com.geophy.automation.pages.LoginPage;
+import com.geophy.automation.pages.PropertyDueDiligencePage;
+import com.geophy.automation.pages.PropertyMapPage;
 
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;

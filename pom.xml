@@ -102,8 +102,11 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>2.22.0</version>
-				<!-- <configuration> <parallel>methods</parallel> <threadCount>3</threadCount> 
-					<perCoreThreadCount>true</perCoreThreadCount> </configuration> -->
+				<configuration>
+					<parallel>methods</parallel>
+					<threadCount>3</threadCount>
+					<perCoreThreadCount>true</perCoreThreadCount>
+				</configuration>
 
 			</plugin>
 

@@ -1,4 +1,4 @@
-package com.geophy.reporter;
+package com.geophy.utils.selenium;
 
 import java.io.File;
 import java.io.IOException;
