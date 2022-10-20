@@ -14,6 +14,12 @@ pipeline {
             }
         }
 
+        stage ('Install drivers') {
+            steps {
+                sh './scripts/InstallChrome.sh' 
+            }
+        }
+        
         stage ('Build') {
             steps {
                 sh 'mvn clean install' 
