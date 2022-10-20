@@ -16,6 +16,7 @@ pipeline {
 
         stage ('Install drivers') {
             steps {
+                sh "chmod +x -R ${env.WORKSPACE}"
                 sh './scripts/InstallChrome.sh' 
             }
         }
